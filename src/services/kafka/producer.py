@@ -1,7 +1,7 @@
 from aiokafka import AIOKafkaProducer
 
 from src.broker.kafka import Manager
-from src.services.kafka.converters import dump_value_orjson
+from src.services.common.converters import dump_value_orjson
 
 
 class ProducerService(Manager):
