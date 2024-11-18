@@ -39,9 +39,31 @@ class UvicornSettings(BaseSettings):
     reload: Optional[bool] = False
 
 
+class KafkaSettings(BaseSettings):
+    root_dir_path: DirectoryPath = get_root_dir_path()
+    model_config = SettingsConfigDict(
+        env_file=f'{root_dir_path}/.env',
+        env_file_encoding='utf-8',
+        env_prefix='kafka_',
+        extra='ignore'
+    )
+
+    host: str
+    port: int
+
+    @property
+    def get_url(self) -> str:
+        return f'{self.host}:{self.port}'
+
+
+
 def get_app_settings() -> AppSettings:
     return AppSettings()
 
 
 def get_uvicorn_settings() -> UvicornSettings:
     return UvicornSettings()
+
+
+def get_kafka_settings() -> KafkaSettings:
+    return KafkaSettings()
