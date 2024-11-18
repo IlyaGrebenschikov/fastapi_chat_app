@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   backend-service:
     build:
@@ -5,10 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: backend-service
     volumes:
-      - ../src/:/usr/backend_app/src/.
-    working_dir: /usr/backend_app/.
+      - ../src/:/usr/backend_app/src
+    working_dir: /usr/backend_app
     ports:
       - "8080:8080"
+    env_file:
+      - ../.env
     command: python -m src
     networks:
       - app-network
